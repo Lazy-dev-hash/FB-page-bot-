@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Bot Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🤖</div>
+                    <h1>Facebook Bot Dashboard</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot online"></div>
+                    <span id="status-text">Online</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💬</div>
+                    <div class="stat-content">
+                        <h3>Total Messages</h3>
+                        <div class="stat-number" id="total-messages">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3>Unique Users</h3>
+                        <div class="stat-number" id="total-users">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-content">
+                        <h3>Uptime</h3>
+                        <div class="stat-number" id="uptime">0h 0m</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-content">
+                        <h3>Last Activity</h3>
+                        <div class="stat-number" id="last-activity">Never</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🔧 Setup Instructions</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="setup-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Configure Environment Variables</h4>
+                                <p>Set up your secrets in Replit:</p>
+                                <ul>
+                                    <li><code>PAGE_ACCESS_TOKEN</code> - Facebook Page Access Token</li>
+                                    <li><code>VERIFY_TOKEN</code> - Webhook verification token</li>
+                                    <li><code>OPENAI_API_KEY</code> - OpenAI API key</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="setup-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Deploy Your Bot</h4>
+                                <p>Deploy this Replit to get a public URL for your webhook.</p>
+                            </div>
+                        </div>
+
+                        <div class="setup-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Configure Facebook Webhook</h4>
+                                <p>In Facebook Developer Console, set:</p>
+                                <ul>
+                                    <li>Webhook URL: <code id="webhook-url">https://your-repl-url.com/webhook</code></li>
+                                    <li>Verify Token: Your <code>VERIFY_TOKEN</code></li>
+                                    <li>Subscribe to: <code>messages</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📊 Recent Activity</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="activity-feed" id="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-icon">🟢</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Bot Started</div>
+                                    <div class="activity-time" id="start-time">Just now</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🔗 Quick Links</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="quick-links">
+                            <a href="/health" class="quick-link" target="_blank">
+                                <div class="link-icon">🏥</div>
+                                <span>Health Check</span>
+                            </a>
+                            <a href="/api/stats" class="quick-link" target="_blank">
+                                <div class="link-icon">📈</div>
+                                <span>API Stats</span>
+                            </a>
+                            <a href="https://developers.facebook.com/" class="quick-link" target="_blank">
+                                <div class="link-icon">📘</div>
+                                <span>Facebook Developers</span>
+                            </a>
+                            <a href="https://platform.openai.com/" class="quick-link" target="_blank">
+                                <div class="link-icon">🧠</div>
+                                <span>OpenAI Platform</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Facebook Bot Dashboard. Powered by GPT-4 & Replit.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
