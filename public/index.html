@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook Bot Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>🎓 EduBot Dashboard - AI Learning Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <meta name="description" content="AI-powered educational bot dashboard for Facebook Messenger">
+    <meta name="keywords" content="AI, education, chatbot, Facebook, learning, GPT-4">
 </head>
 <body>
     <div class="container">
@@ -14,11 +17,11 @@
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-icon">🤖</div>
-                    <h1>Facebook Bot Dashboard</h1>
+                    <h1>EduBot Dashboard</h1>
                 </div>
                 <div class="status-indicator">
                     <div class="status-dot online"></div>
-                    <span id="status-text">Online</span>
+                    <span id="status-text">🟢 Bot is Learning!</span>
                 </div>
             </div>
         </header>
@@ -28,23 +31,23 @@
                 <div class="stat-card">
                     <div class="stat-icon">💬</div>
                     <div class="stat-content">
-                        <h3>Total Messages</h3>
+                        <h3>Learning Conversations</h3>
                         <div class="stat-number" id="total-messages">0</div>
                     </div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon">👥</div>
+                    <div class="stat-icon">🎓</div>
                     <div class="stat-content">
-                        <h3>Unique Users</h3>
+                        <h3>Student Interactions</h3>
                         <div class="stat-number" id="total-users">0</div>
                     </div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-icon">🕐</div>
                     <div class="stat-content">
-                        <h3>Uptime</h3>
+                        <h3>Learning Uptime</h3>
                         <div class="stat-number" id="uptime">0h 0m</div>
                     </div>
                 </div>
@@ -52,8 +55,8 @@
                 <div class="stat-card">
                     <div class="stat-icon">⚡</div>
                     <div class="stat-content">
-                        <h3>Last Activity</h3>
-                        <div class="stat-number" id="last-activity">Never</div>
+                        <h3>Latest Interaction</h3>
+                        <div class="stat-number" id="last-activity">🌟 Ready for learning!</div>
                     </div>
                 </div>
             </div>
@@ -61,18 +64,18 @@
             <div class="content-grid">
                 <div class="card">
                     <div class="card-header">
-                        <h2>🔧 Setup Instructions</h2>
+                        <h2>🚀 Quick Setup Guide</h2>
                     </div>
                     <div class="card-content">
                         <div class="setup-step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h4>Configure Environment Variables</h4>
-                                <p>Set up your secrets in Replit:</p>
+                                <h4>🔐 Configure Your API Keys</h4>
+                                <p>Set up your educational bot credentials in Replit Secrets:</p>
                                 <ul>
-                                    <li><code>PAGE_ACCESS_TOKEN</code> - Facebook Page Access Token</li>
-                                    <li><code>VERIFY_TOKEN</code> - Webhook verification token</li>
-                                    <li><code>OPENAI_API_KEY</code> - OpenAI API key</li>
+                                    <li><code>PAGE_ACCESS_TOKEN</code> - Your Facebook Page Access Token</li>
+                                    <li><code>VERIFY_TOKEN</code> - Custom webhook verification token</li>
+                                    <li><code>OPENAI_API_KEY</code> - Your OpenAI GPT-4 API key</li>
                                 </ul>
                             </div>
                         </div>
@@ -80,20 +83,20 @@
                         <div class="setup-step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h4>Deploy Your Bot</h4>
-                                <p>Deploy this Replit to get a public URL for your webhook.</p>
+                                <h4>🌐 Deploy Your EduBot</h4>
+                                <p>Deploy this Replit project to get a live educational assistant that can help students learn!</p>
                             </div>
                         </div>
 
                         <div class="setup-step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h4>Configure Facebook Webhook</h4>
-                                <p>In Facebook Developer Console, set:</p>
+                                <h4>🔗 Connect Facebook Webhook</h4>
+                                <p>In your Facebook Developer Console, configure:</p>
                                 <ul>
                                     <li>Webhook URL: <code id="webhook-url">https://your-repl-url.com/webhook</code></li>
-                                    <li>Verify Token: Your <code>VERIFY_TOKEN</code></li>
-                                    <li>Subscribe to: <code>messages</code></li>
+                                    <li>Verify Token: Your <code>VERIFY_TOKEN</code> value</li>
+                                    <li>Subscribe to: <code>messages</code> events</li>
                                 </ul>
                             </div>
                         </div>
@@ -102,15 +105,15 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h2>📊 Recent Activity</h2>
+                        <h2>📊 Learning Activity Feed</h2>
                     </div>
                     <div class="card-content">
                         <div class="activity-feed" id="activity-feed">
                             <div class="activity-item">
-                                <div class="activity-icon">🟢</div>
+                                <div class="activity-icon">🚀</div>
                                 <div class="activity-content">
-                                    <div class="activity-title">Bot Started</div>
-                                    <div class="activity-time" id="start-time">Just now</div>
+                                    <div class="activity-title">🎓 EduBot Learning System Activated</div>
+                                    <div class="activity-time" id="start-time">Ready to help students learn!</div>
                                 </div>
                             </div>
                         </div>
@@ -119,17 +122,17 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h2>🔗 Quick Links</h2>
+                        <h2>🔗 Educational Resources</h2>
                     </div>
                     <div class="card-content">
                         <div class="quick-links">
                             <a href="/health" class="quick-link" target="_blank">
                                 <div class="link-icon">🏥</div>
-                                <span>Health Check</span>
+                                <span>Bot Health Check</span>
                             </a>
                             <a href="/api/stats" class="quick-link" target="_blank">
                                 <div class="link-icon">📈</div>
-                                <span>API Stats</span>
+                                <span>Learning Analytics</span>
                             </a>
                             <a href="https://developers.facebook.com/" class="quick-link" target="_blank">
                                 <div class="link-icon">📘</div>
@@ -139,6 +142,52 @@
                                 <div class="link-icon">🧠</div>
                                 <span>OpenAI Platform</span>
                             </a>
+                            <a href="https://replit.com/learn" class="quick-link" target="_blank">
+                                <div class="link-icon">🎓</div>
+                                <span>Replit Learn</span>
+                            </a>
+                            <a href="#" class="quick-link" onclick="showEducationalTips()">
+                                <div class="link-icon">💡</div>
+                                <span>Learning Tips</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🎯 EduBot Features</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-icon">🧠</div>
+                                <div class="feature-content">
+                                    <h4>AI-Powered Learning</h4>
+                                    <p>GPT-4 provides intelligent, contextual responses to help students understand complex topics.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📚</div>
+                                <div class="feature-content">
+                                    <h4>Subject Versatility</h4>
+                                    <p>Supports learning across multiple subjects: Math, Science, Language Arts, History, and more.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">⚡</div>
+                                <div class="feature-content">
+                                    <h4>Instant Responses</h4>
+                                    <p>Real-time answers help maintain learning momentum and student engagement.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📊</div>
+                                <div class="feature-content">
+                                    <h4>Learning Analytics</h4>
+                                    <p>Track student interactions and popular topics to improve educational outcomes.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,10 +195,23 @@
         </main>
 
         <footer class="footer">
-            <p>&copy; 2024 Facebook Bot Dashboard. Powered by GPT-4 & Replit.</p>
+            <p>🎓 Empowering Education Through AI • Built with ❤️ using Replit, GPT-4 & Facebook Messenger</p>
         </footer>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function showEducationalTips() {
+            const tips = [
+                "💡 Encourage students to ask follow-up questions for deeper learning",
+                "📚 The bot works best with specific, clear questions",
+                "🎯 Use the bot for homework help, concept explanations, and study assistance",
+                "⭐ Regular interaction helps the AI understand student learning patterns",
+                "🔬 Perfect for STEM subjects, languages, and creative writing support"
+            ];
+            
+            alert("🎓 Educational Tips:\n\n" + tips.join("\n\n"));
+        }
+    </script>
 </body>
 </html>
