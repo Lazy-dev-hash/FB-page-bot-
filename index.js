@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 
 // Facebook Page Access Token and Verify Token
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const VERIFY_TOKEN = process.env.VERIFY_TOKEN || 'your_verify_token_here';
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN || '@facebook_bot';
 
 // OpenAI API Key
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -103,25 +103,39 @@ async function handleMessage(senderPsid, receivedMessage) {
       // Send typing indicator
       await sendTypingIndicator(senderPsid);
       
-      // Get GPT-4 response
-      const gptResponse = await getGPTResponse(receivedMessage.text);
+      // Get AI response
+      const aiResponse = await getGPTResponse(receivedMessage.text);
       
       response = {
-        text: gptResponse
+        text: aiResponse
       };
     } catch (error) {
-      console.error('Error getting GPT response:', error);
+      console.error('Error getting AI response:', error);
+      
+      // Provide specific error messages based on the error type
+      let errorMessage = 'Sorry, I encountered an error processing your message. ';
+      
+      if (error.message.includes('API key')) {
+        errorMessage += 'The AI service needs to be configured. Please contact support.';
+      } else if (error.message.includes('rate limit')) {
+        errorMessage += 'I\'m getting too many requests right now. Please try again in a moment.';
+      } else if (error.message.includes('connection')) {
+        errorMessage += 'I\'m having trouble connecting to my AI brain. Please try again later.';
+      } else {
+        errorMessage += 'Please try again in a moment, or rephrase your question.';
+      }
+      
       response = {
-        text: 'Sorry, I encountered an error processing your message. Please try again later.'
+        text: errorMessage
       };
     }
   } else if (receivedMessage.attachments) {
     response = {
-      text: 'I received your attachment! Currently, I can only respond to text messages, but I appreciate you sharing that with me.'
+      text: '📎 I received your attachment! Currently, I can only respond to text messages, but I appreciate you sharing that with me. Try sending me a text question! 😊'
     };
   } else {
     response = {
-      text: 'Hello! I can help you with questions and conversations. Just send me a text message!'
+      text: 'Hello! 👋 I\'m your educational AI assistant. I can help you with questions about various subjects. Just send me a text message! 📚✨'
     };
   }
 
@@ -144,22 +158,27 @@ async function sendTypingIndicator(senderPsid) {
   }
 }
 
-// Get response from GPT-4
+// Get response from OpenAI (using gpt-3.5-turbo for better availability)
 async function getGPTResponse(userMessage) {
   try {
+    // Check if OpenAI API key is configured
+    if (!OPENAI_API_KEY) {
+      throw new Error('OpenAI API key not configured');
+    }
+
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo", // Using gpt-3.5-turbo for better availability
       messages: [
         {
           role: "system",
-          content: "You are a helpful, friendly, and engaging assistant for a Facebook page. Be conversational, helpful, and concise in your responses. Show personality while being professional. If users ask about technical topics, provide clear explanations. Always be positive and encouraging."
+          content: "You are a helpful, friendly, and engaging educational assistant for a Facebook page. Be conversational, helpful, and concise in your responses. Show personality while being professional. Help students with their questions about various subjects. Always be positive and encouraging."
         },
         {
           role: "user",
           content: userMessage
         }
       ],
-      max_tokens: 500,
+      max_tokens: 400,
       temperature: 0.7,
       presence_penalty: 0.2,
       frequency_penalty: 0.1
@@ -168,7 +187,19 @@ async function getGPTResponse(userMessage) {
     return completion.choices[0].message.content;
   } catch (error) {
     console.error('OpenAI API error:', error);
-    throw error;
+    
+    // Handle specific OpenAI errors
+    if (error.status === 404) {
+      throw new Error('AI model not accessible. Please check your OpenAI API key and model permissions.');
+    } else if (error.status === 401) {
+      throw new Error('Invalid OpenAI API key. Please check your API key configuration.');
+    } else if (error.status === 429) {
+      throw new Error('OpenAI API rate limit reached. Please try again later.');
+    } else if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+      throw new Error('Unable to connect to OpenAI API. Please check your internet connection.');
+    } else {
+      throw new Error('AI service temporarily unavailable. Please try again later.');
+    }
   }
 }
 
